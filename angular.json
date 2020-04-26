@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "KTHDV-Project": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "KTHDV-Project"
+    }
+  },
+  "defaultProject": "KTHDV-Project",
+  "cli": {
+    "analytics": "c56cb4c6-d595-45b4-b94d-c19f1ffcf017"
+  }
 }
