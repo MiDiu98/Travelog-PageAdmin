@@ -1,7 +1,12 @@
 export class User {
   id: number;
-  username: string;
   email: string;
-  password: string;
+  username: string;
+  active: number;
+  detail: string;
+  created: Date;
+  updated: Date;
+  followers: string;
+  n_followers: number;
   token: string;
 }

@@ -8,10 +8,11 @@ import {Constant} from 'src/constants/constant';
 @Injectable({ providedIn: 'root' })
 export class UserService {
     // private apiURL = Constant.COMMON_URL;
-    
+
     // users: User[];
 
-    // constructor(private http: HttpClient) { 
+    // constructor(private http: HttpClient) {
+
     //   this.getData(extends);
     // }
 
@@ -25,12 +26,16 @@ export class UserService {
     //       console.log(data);
     //       this.users = data;
     //     });
-      
+
     // }
-        constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<User[]>(`/users`);
+        return this.http.get<any>(Constant.USERS_URL + `?page=1&rows_per_page=3&sort_by=email&sort_order=asc`);
+    }
+
+    getLastestUsers() {
+        return this.http.get<any>(Constant.USER_URL + `/last4?`);
     }
 
     register(user: User) {

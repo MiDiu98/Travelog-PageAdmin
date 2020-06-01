@@ -15,12 +15,12 @@ import { UpgradeComponent } from './components/upgrade/upgrade.component';
 
 const routes: Routes = [
    // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    // { path: '', component: HomeComponent},
+     { path: 'home', component: HomeComponent},
     // { path: 'layout', component: AdminLayoutComponent},
     { path: 'admin/login', component: LoginComponent },
     {
       path: '',
-      component: AdminLayoutComponent,
+      component: AdminLayoutComponent, canActivate: [AuthGuard],
       children: [
           { path: 'dashboard',      component: DashboardComponent },
           { path: 'user-profile',   component: UserProfileComponent },

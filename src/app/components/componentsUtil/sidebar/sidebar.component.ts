@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, SystemJsNgModuleLoader } from '@angular/core';
+import { User } from 'src/app/_models';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -22,18 +23,28 @@ export const ROUTES: RouteInfo[] = [
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   menuItems: any[];
+  currentUSer: User;
 
   constructor() { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
+
+  ngOnDestroy() {
+    //this.current
+  }
+
   isMobileMenu() {
       if ($(window).width() > 991) {
           return false;
       }
       return true;
-  };
+  }
+
+  logout() {
+    console.log("logout");
+  }
 }

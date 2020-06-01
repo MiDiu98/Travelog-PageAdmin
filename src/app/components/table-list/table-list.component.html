@@ -1,12 +1,16 @@
-<p>table-list works!</p>
+<style>
+    .btn-just-icon {
+        border-width: 0px !important;
+    }
+</style>
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title ">Simple Table</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title ">Latest Registered Users</h4>
+                        <p class="card-category"> Here is 4 latest registed users</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -16,119 +20,60 @@
                                         ID
                                     </th>
                                     <th>
-                                        Name
+                                        Username
                                     </th>
                                     <th>
-                                        Country
+                                        Email
                                     </th>
                                     <th>
-                                        City
+                                        Active
                                     </th>
                                     <th>
-                                        Salary
+                                        Detail
+                                    </th>
+                                    <th>
+                                        Create at
+                                    </th>
+                                    <th>
+                                        Update at
+                                    </th>
+                                    <th>
+                                        Followed
                                     </th>
                                 </thead>
-                                <tbody>
+                                <tbody *ngFor="let user of lastestUsers">
                                     <tr>
                                         <td>
-                                            1
+                                            {{user.id}}
                                         </td>
                                         <td>
-                                            Dakota Rice
+                                            {{user.username}}
                                         </td>
                                         <td>
-                                            Niger
+                                            {{user.email}}
                                         </td>
                                         <td>
-                                            Oud-Turnhout
-                                        </td>
-                                        <td class="text-primary">
-                                            $36,738
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
+                                            {{user.active}}
                                         </td>
                                         <td>
-                                            Minerva Hooper
+                                            {{user.detail}}
                                         </td>
                                         <td>
-                                            Curaçao
+                                            {{user.created | date : 'short'}}
                                         </td>
                                         <td>
-                                            Sinaai-Waas
+                                            {{user.updated | date : 'short'}}
                                         </td>
-                                        <td class="text-primary">
-                                            $23,789
+                                        <td class="text-center">
+                                            {{user.n_followers}}
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            Sage Rodriguez
-                                        </td>
-                                        <td>
-                                            Netherlands
-                                        </td>
-                                        <td>
-                                            Baileux
-                                        </td>
-                                        <td class="text-primary">
-                                            $56,142
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            Philip Chaney
-                                        </td>
-                                        <td>
-                                            Korea, South
-                                        </td>
-                                        <td>
-                                            Overland Park
-                                        </td>
-                                        <td class="text-primary">
-                                            $38,735
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            Doris Greene
-                                        </td>
-                                        <td>
-                                            Malawi
-                                        </td>
-                                        <td>
-                                            Feldkirchen in Kärnten
-                                        </td>
-                                        <td class="text-primary">
-                                            $63,542
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            Mason Porter
-                                        </td>
-                                        <td>
-                                            Chile
-                                        </td>
-                                        <td>
-                                            Gloucester
-                                        </td>
-                                        <td class="text-primary">
-                                            $78,615
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button" matTooltip="Edit Task" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                            <i class="material-icons">edit</i>
+                                          </button>
+                                            <button mat-raised-button type="button" matTooltip="Remove" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                            <i class="material-icons">delete</i>
+                                          </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -140,130 +85,71 @@
             <div class="col-md-12">
                 <div class="card card-plain">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title mt-0"> Table on Plain Background</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <h4 class="card-title mt-0">User List</h4>
+                        <p class="card-category"> Here is list user register</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover">
-                                <thead class="">
+                                <thead class=" text-primary">
                                     <th>
                                         ID
                                     </th>
                                     <th>
-                                        Name
+                                        Username
                                     </th>
                                     <th>
-                                        Country
+                                        Email
                                     </th>
                                     <th>
-                                        City
+                                        Active
                                     </th>
                                     <th>
-                                        Salary
+                                        Detail
+                                    </th>
+                                    <th>
+                                        Create at
+                                    </th>
+                                    <th>
+                                        Update at
+                                    </th>
+                                    <th>
+                                        Followed
                                     </th>
                                 </thead>
-                                <tbody>
+                                <tbody *ngFor="let user of users">
                                     <tr>
                                         <td>
-                                            1
+                                            {{user.id}}
                                         </td>
                                         <td>
-                                            Dakota Rice
+                                            {{user.username}}
                                         </td>
                                         <td>
-                                            Niger
+                                            {{user.email}}
                                         </td>
                                         <td>
-                                            Oud-Turnhout
+                                            {{user.active}}
                                         </td>
                                         <td>
-                                            $36,738
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
+                                            {{user.detail}}
                                         </td>
                                         <td>
-                                            Minerva Hooper
+                                            {{user.created | date : 'short'}}
                                         </td>
                                         <td>
-                                            Curaçao
+                                            {{user.updated | date : 'short'}}
                                         </td>
-                                        <td>
-                                            Sinaai-Waas
+                                        <td class="text-center">
+                                            {{user.n_followers}}
                                         </td>
-                                        <td>
-                                            $23,789
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            Sage Rodriguez
-                                        </td>
-                                        <td>
-                                            Netherlands
-                                        </td>
-                                        <td>
-                                            Baileux
-                                        </td>
-                                        <td>
-                                            $56,142
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            Philip Chaney
-                                        </td>
-                                        <td>
-                                            Korea, South
-                                        </td>
-                                        <td>
-                                            Overland Park
-                                        </td>
-                                        <td>
-                                            $38,735
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            Doris Greene
-                                        </td>
-                                        <td>
-                                            Malawi
-                                        </td>
-                                        <td>
-                                            Feldkirchen in Kärnten
-                                        </td>
-                                        <td>
-                                            $63,542
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            Mason Porter
-                                        </td>
-                                        <td>
-                                            Chile
-                                        </td>
-                                        <td>
-                                            Gloucester
-                                        </td>
-                                        <td>
-                                            $78,615
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button" matTooltip="Edit Task" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                        <i class="material-icons">edit</i>
+                                      </button>
+                                            <button mat-raised-button type="button" matTooltip="Remove" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                        <i class="material-icons">delete</i>
+                                      </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -271,6 +157,15 @@
                         </div>
                     </div>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" style="width: max-content; margin: auto;">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
