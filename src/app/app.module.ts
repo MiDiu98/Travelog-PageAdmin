@@ -32,6 +32,8 @@ import { MatInputModule } from '@angular/material/input';
 import {
   AgmCoreModule
 } from '@agm/core';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import {
       TableListComponent,
       TypographyComponent,
       UpgradeComponent,
-      UserProfileComponent
+      UserProfileComponent,
+      UserListComponent,
+      PostListComponent
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

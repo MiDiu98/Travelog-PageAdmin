@@ -48,14 +48,17 @@ export class AdminLayoutComponent implements OnInit {
         });
         this.router.events.subscribe((event:any) => {
             if (event instanceof NavigationStart) {
-                if (event.url != this.lastPoppedUrl)
+                // tslint:disable-next-line: triple-equals
+                if (event.url != this.lastPoppedUrl) {
                     this.yScrollStack.push(window.scrollY);
+                }
             } else if (event instanceof NavigationEnd) {
                 if (event.url == this.lastPoppedUrl) {
                     this.lastPoppedUrl = undefined;
                     window.scrollTo(0, this.yScrollStack.pop());
-                } else
+                } else {
                     window.scrollTo(0, 0);
+                }
             }
         });
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {

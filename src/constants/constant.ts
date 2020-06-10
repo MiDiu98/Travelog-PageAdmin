@@ -12,4 +12,6 @@ export  class Constant {
   public static USERS_URL = [Constant.URL_API, Constant.PREFIX, 'users'].join('/');
 
   public static USER_URL = [Constant.URL_API, Constant.PREFIX, 'user'].join('/');
+
+  public static POSTS_URL = [Constant.URL_API, Constant.PREFIX, 'posts'].join('/');
 }

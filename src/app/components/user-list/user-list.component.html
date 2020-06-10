@@ -1,0 +1,177 @@
+<style>
+    .btn-just-icon {
+        border-width: 0px !important;
+    }
+</style>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Latest Registered Users</h4>
+                        <p class="card-category"> Here is 4 latest registed users</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Active
+                                    </th>
+                                    <th>
+                                        Detail
+                                    </th>
+                                    <th>
+                                        Create at
+                                    </th>
+                                    <th>
+                                        Update at
+                                    </th>
+                                    <th>
+                                        Followed
+                                    </th>
+                                </thead>
+                                <tbody *ngFor="let user of lastestUsers">
+                                    <tr>
+                                        <td>
+                                            {{user.id}}
+                                        </td>
+                                        <td>
+                                            {{user.username}}
+                                        </td>
+                                        <td>
+                                            {{user.email}}
+                                        </td>
+                                        <td>
+                                            {{user.active}}
+                                        </td>
+                                        <td>
+                                            {{user.detail}}
+                                        </td>
+                                        <td>
+                                            {{user.created | date : 'short'}}
+                                        </td>
+                                        <td>
+                                            {{user.updated | date : 'short'}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{user.n_followers}}
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button" matTooltip="Edit Task" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">edit</i>
+                                        </button>
+                                            <button mat-raised-button type="button" matTooltip="Remove" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                          <i class="material-icons">delete</i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">User List</h4>
+                        <p class="card-category"> Here is list user register</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Active
+                                    </th>
+                                    <th>
+                                        Detail
+                                    </th>
+                                    <th>
+                                        Create at
+                                    </th>
+                                    <th>
+                                        Update at
+                                    </th>
+                                    <th>
+                                        Followed
+                                    </th>
+                                </thead>
+                                <tbody *ngFor="let user of users">
+                                    <tr>
+                                        <td>
+                                            {{user.id}}
+                                        </td>
+                                        <td>
+                                            {{user.username}}
+                                        </td>
+                                        <td>
+                                            {{user.email}}
+                                        </td>
+                                        <td>
+                                            {{user.active}}
+                                        </td>
+                                        <td>
+                                            {{user.detail}}
+                                        </td>
+                                        <td>
+                                            {{user.created | date : 'short'}}
+                                        </td>
+                                        <td>
+                                            {{user.updated | date : 'short'}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{user.n_followers}}
+                                        </td>
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button" matTooltip="Edit Task" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                      <i class="material-icons">edit</i>
+                                    </button>
+                                            <button mat-raised-button type="button" matTooltip="Remove" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                      <i class="material-icons">delete</i>
+                                    </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" style="width: max-content; margin: auto;">
+                        <li class="page-item"><a class="page-link" href="#">Start</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                << Pre</a>
+                        </li>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next >></a></li>
+                        <li class="page-item"><a class="page-link" href="#">End</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

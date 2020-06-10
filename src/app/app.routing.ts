@@ -12,6 +12,8 @@ import { TypographyComponent } from './components/typography/typography.componen
 import { IconsComponent } from './components/icons/icons.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { UpgradeComponent } from './components/upgrade/upgrade.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 const routes: Routes = [
    // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -24,7 +26,8 @@ const routes: Routes = [
       children: [
           { path: 'dashboard',      component: DashboardComponent },
           { path: 'user-profile',   component: UserProfileComponent },
-          { path: 'table-list',     component: TableListComponent },
+          { path: 'user-list',     component: UserListComponent },
+          { path: 'post-list',     component: PostListComponent },
           { path: 'typography',     component: TypographyComponent },
           { path: 'icons',          component: IconsComponent },
           { path: 'notifications',  component: NotificationsComponent },
