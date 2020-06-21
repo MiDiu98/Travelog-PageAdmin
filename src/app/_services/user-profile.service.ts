@@ -11,7 +11,14 @@ export class UserProfileService {
 
   constructor(private http: HttpClient) { }
 
-  getProfile() {
+  public getProfile() {
     return this.http.get<any>(Constant.USERS_PROFILE_URL);
+  }
+
+  public updateProfile(id: number, username: string, password: string, detail: string) {
+    if (password == null) {
+      return this.http.put<any>(Constant.USER_URL + id, {username, detail});
+    }
+    return this.http.put<any>(Constant.USER_URL + id, {username, password, detail});
   }
 }

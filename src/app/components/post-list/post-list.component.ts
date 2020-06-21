@@ -11,7 +11,11 @@ import { PostService } from 'src/app/_services/post.service';
   styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
-  posts: Post[] = [];
+  dailyPosts: Post[] = [];
+  blockedPosts: Post[] = [];
+  enabledPosts: Post[] = [];
+  showEnabledPosts = true;
+  showBlockdPosts = false;
 
   constructor(
     private router: Router,
@@ -19,14 +23,47 @@ export class PostListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadDailyPost();
+    this.getDisabledPosts();
+    this.getEnabledPosts();
   }
 
-  private loadDailyPost() {
-    this.postService.getDailyPost().pipe(first()).subscribe(posts => {
-      console.log(posts);
-        this.posts = posts.Data;
-        console.log(this.posts);
+  private getDailyPost() {
+    this.postService.getDailyPost().pipe(first()).subscribe(response => {
+        console.log(response);
+        this.dailyPosts = response.Data;
+        console.log(this.dailyPosts);
+    });
+  }
+
+  private getEnabledPosts() {
+    this.postService.getPostsByStatus('open').pipe(first()).subscribe(response => {
+        console.log(response);
+        this.enabledPosts = response.Data;
+        console.log(this.enabledPosts);
+    });
+  }
+
+  private getDisabledPosts() {
+    this.postService.getPostsByStatus('block').pipe(first()).subscribe(response => {
+        console.log(response);
+        this.blockedPosts = response.Data;
+        console.log(this.blockedPosts);
+    });
+  }
+
+  public openPost(postId: number, event) {
+    this.postService.updatePostByAdmin(postId, 'open').subscribe(response => {
+      console.log(response);
+      this.getEnabledPosts();
+      this.getDisabledPosts();
+    });
+  }
+
+  public blockPost(postId: number, event) {
+    this.postService.updatePostByAdmin(postId, 'block').subscribe(response => {
+      console.log(response);
+      this.getEnabledPosts();
+      this.getDisabledPosts();
     });
   }
 
