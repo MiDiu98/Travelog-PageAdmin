@@ -29,8 +29,8 @@ export class UserService {
     // }
     constructor(private http: HttpClient) { }
 
-    public getAll(page: number = 1, rows: number = 5, sortBy: string = 'updated', order: string = 'desc') {
-        return this.http.get<any>(Constant.USERS_URL + `?page=${page - 1}&rows_per_page=${rows}&sort_by=${sortBy}&sort_order=${order}`);
+    public getAll(page: number, rows: number = 5, sortBy: string = 'updated', order: string = 'desc') {
+        return this.http.get<any>(Constant.USERS_URL + `?page=${page}&rows_per_page=${rows}&sort_by=${sortBy}&sort_order=${order}`);
     }
 
     public getLastestUsers() {

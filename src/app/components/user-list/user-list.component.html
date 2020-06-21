@@ -168,16 +168,16 @@
                         </div>
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" style="width: max-content; margin: auto;">
-                                <li class="page-item"><a class="page-link" href="#">Start</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
+                                <li class="page-item {{currentPage===startPage? 'disabled':''}}"><a class="page-link" (click)="getStartPage()">Start</a></li>
+                                <li class="page-item {{currentPage===startPage? 'disabled':''}}">
+                                    <a class="page-link" (click)="getPrePage()">
                                         << Pre</a>
                                 </li>
                                 <li class="page-item"><a class="page-link">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item active"><a class="page-link">{{currentPage}}</a></li>
                                 <li class="page-item"><a class="page-link">...</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next >></a></li>
-                                <li class="page-item"><a class="page-link" href="#">End</a></li>
+                                <li class="page-item {{currentPage===endPage? 'disabled':''}}"><a class="page-link" (click)="getNextPage()">Next >></a></li>
+                                <li class="page-item {{currentPage===endPage? 'disabled':''}}"><a class="page-link" (click)="getEndPage()">End</a></li>
                             </ul>
                         </nav>
                     </div>

@@ -6,6 +6,7 @@ import { UserService, AuthenticationService } from 'src/app/_services';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-user-list',
@@ -24,6 +25,12 @@ export class UserListComponent implements OnInit {
   showActiveUser = false;
   showDisabledUser = false;
 
+  // For Pagination
+  currentPage = 1;
+  startPage = 1;
+  endPage = 1;
+  totalRecords = 0;
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -38,7 +45,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLastestUsers();
-    this.getAll();
+    this.getEnabledUser();
     this.getUserDisabled();
   }
 
@@ -54,9 +61,11 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  getAll() {
-    this.userService.getAll().pipe(first()).subscribe(response => {
+  getEnabledUser() {
+    this.userService.getAll(1).pipe(first()).subscribe(response => {
       this.users = response.Data;
+      this.totalRecords = response.TotalRecords;
+      this.endPage = Math.floor(this.totalRecords / 5) + (this.totalRecords % 5 === 0 ? 0 : 1);
     });
   }
 
@@ -67,7 +76,7 @@ export class UserListComponent implements OnInit {
           data => {
             this.alertService.success("Updated user " + username, true);
             this.getLastestUsers();
-            this.getAll();
+            this.getEnabledUser();
             this.getUserDisabled();
           },
           error => {
@@ -84,7 +93,7 @@ export class UserListComponent implements OnInit {
           data => {
             this.alertService.success("Updated user " + username, true);
             this.getLastestUsers();
-            this.getAll();
+            this.getEnabledUser();
             this.getUserDisabled();
           },
           error => {
@@ -92,6 +101,50 @@ export class UserListComponent implements OnInit {
           }
         )
       }
+    }
+
+    public getNextPage() {
+        this.userService.getAll(this.currentPage + 1).subscribe(
+          response => {
+            this.users = response.Data;
+            this.totalRecords = response.TotalRecords;
+            this.endPage = Math.floor(this.totalRecords / 5) + (this.totalRecords % 5 === 0 ? 0 : 1);
+            this.currentPage++;
+          }
+        );
+    }
+
+    public getPrePage() {
+      this.userService.getAll(this.currentPage - 1).subscribe(
+        response => {
+          this.users = response.Data;
+          this.totalRecords = response.TotalRecords;
+          this.endPage = Math.floor(this.totalRecords / 5) + (this.totalRecords % 5 === 0 ? 0 : 1);
+          this.currentPage--;
+        }
+      );
+    }
+
+    public getStartPage() {
+      this.userService.getAll(this.startPage).subscribe(
+        response => {
+          this.users = response.Data;
+          this.totalRecords = response.TotalRecords;
+          this.endPage = Math.floor(this.totalRecords / 5) + (this.totalRecords % 5 === 0 ? 0 : 1);
+          this.currentPage = this.startPage;
+        }
+      );
+    }
+
+    public getEndPage() {
+      this.userService.getAll(this.endPage).subscribe(
+        response => {
+          this.users = response.Data;
+          this.totalRecords = response.TotalRecords;
+          this.endPage = Math.floor(this.totalRecords / 5) + (this.totalRecords % 5 === 0 ? 0 : 1);
+          this.currentPage = this.endPage;
+        }
+      );
     }
 }
 
