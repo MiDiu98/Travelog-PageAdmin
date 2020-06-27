@@ -29,31 +29,24 @@ export class PostListComponent implements OnInit {
 
   private getDailyPost() {
     this.postService.getDailyPost().pipe(first()).subscribe(response => {
-        console.log(response);
         this.dailyPosts = response.Data;
-        console.log(this.dailyPosts);
     });
   }
 
   private getEnabledPosts() {
     this.postService.getPostsByStatus('open').pipe(first()).subscribe(response => {
-        console.log(response);
         this.enabledPosts = response.Data;
-        console.log(this.enabledPosts);
     });
   }
 
   private getDisabledPosts() {
     this.postService.getPostsByStatus('block').pipe(first()).subscribe(response => {
-        console.log(response);
         this.blockedPosts = response.Data;
-        console.log(this.blockedPosts);
     });
   }
 
   public openPost(postId: number, event) {
     this.postService.updatePostByAdmin(postId, 'open').subscribe(response => {
-      console.log(response);
       this.getEnabledPosts();
       this.getDisabledPosts();
     });
@@ -61,7 +54,6 @@ export class PostListComponent implements OnInit {
 
   public blockPost(postId: number, event) {
     this.postService.updatePostByAdmin(postId, 'block').subscribe(response => {
-      console.log(response);
       this.getEnabledPosts();
       this.getDisabledPosts();
     });

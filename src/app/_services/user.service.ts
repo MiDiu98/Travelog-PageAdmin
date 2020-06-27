@@ -6,27 +6,6 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    // private apiURL = Constant.COMMON_URL;
-
-    // users: User[];
-
-    // constructor(private http: HttpClient) {
-
-    //   this.getData(extends);
-    // }
-
-    // getData(extends: string) {
-    //    return this.http.get(this.apiURL + extends).map((response: Response) => response.json());
-    // }
-
-    // getAll() {
-    //   getData().this.service.function
-    //     .subscribe(data => {
-    //       console.log(data);
-    //       this.users = data;
-    //     });
-
-    // }
     constructor(private http: HttpClient) { }
 
     public getAll(page: number, rows: number = 5, sortBy: string = 'updated', order: string = 'desc') {

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models/user';
-import { UserService, AuthenticationService, AlertService } from 'src/app/_services';
+import { UserService } from 'src/app/_services';
 import { first } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
-import { UserProfileService } from 'src/app/_services/user-profile.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -13,36 +10,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  user: User;
-  currentUser: User;
-  currentUserSubscription: Subscription;
-  updateProfile: FormGroup;
+  public user: User;
+  public username: string;
+  public detail: string;
+  public email: string;
+  public updateProfile: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
-    private authenticationService: AuthenticationService,
     private userService: UserService) {
-      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-      this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-          this.currentUser = user;
-      });
+      this.username = '';
+      this.detail = '';
+      this.email = '';
     }
 
   ngOnInit(): void {
+    this.getProfile();
     this.updateProfile = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       detail: ['', Validators.required],
     });
-    this.getProfile();
   }
 
   getProfile() {
     this.userService.getProfile().pipe(first()).subscribe(reponse => {
-      console.log(reponse);
       this.user = reponse;
+      this.username = this.user.username;
+      this.detail = this.user.detail;
+      this.email = this.user.email;
       this.f.username.setValue(this.user.username);
       this.f.password.setValue(this.user.password);
       this.f.detail.setValue(this.user.detail);
