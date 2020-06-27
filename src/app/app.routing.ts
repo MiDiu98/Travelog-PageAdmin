@@ -6,8 +6,6 @@ import { DashboardComponent } from './components/dashboard';
 import { AdminLayoutComponent } from './components/layout-admin';
 import { AdminLayoutRoutes } from './components/layout-admin/admin-layout.routing';
 import { UserProfileComponent } from './components/user-profile';
-import { NotificationsComponent } from './components/notifications/notifications.component';
-import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 
@@ -23,9 +21,7 @@ const routes: Routes = [
           { path: 'dashboard',      component: DashboardComponent },
           { path: 'user-profile',   component: UserProfileComponent },
           { path: 'user-list',     component: UserListComponent },
-          { path: 'post-list',     component: PostListComponent },
-          { path: 'notifications',  component: NotificationsComponent },
-          { path: 'upgrade',        component: UpgradeComponent },
+          { path: 'post-list',     component: PostListComponent }
       ]
     },
 

@@ -20,8 +20,6 @@ import { AdminLayoutComponent } from './components/layout-admin/layout-admin.com
 import { NavbarComponent } from './components/componentsUtil/navbar/navbar.component';
 import { FooterComponent } from './components/componentsUtil/footer/footer.component';
 import { SidebarComponent } from './components/componentsUtil/sidebar/sidebar.component';
-import { NotificationsComponent } from './components/notifications/notifications.component';
-import { UpgradeComponent } from './components/upgrade/upgrade.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -51,8 +49,6 @@ import { BasicAuthHttpInterceptorService } from './_services/basic-auth-http-int
       NavbarComponent,
       FooterComponent,
       SidebarComponent,
-      NotificationsComponent,
-      UpgradeComponent,
       UserProfileComponent,
       UserListComponent,
       PostListComponent

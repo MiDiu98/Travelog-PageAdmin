@@ -12,9 +12,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
     { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
     { path: '/user-list', title: 'User List',  icon:'content_paste', class: '' },
-    { path: '/post-list', title: 'Post List',  icon:'content_paste', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+    { path: '/post-list', title: 'Post List',  icon:'content_paste', class: '' }
 ];
 
 @Component({
