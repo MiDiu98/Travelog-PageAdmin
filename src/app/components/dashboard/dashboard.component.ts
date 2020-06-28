@@ -1,5 +1,10 @@
+import { element } from 'protractor';
+import { IPostListData, IPostData } from './../../_models/post';
+import { PostService } from './../../_services/post.service';
+import { IUserListData, IUserData } from '../../_models/user';
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,8 +12,14 @@ import * as Chartist from 'chartist';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  totalUser = 0;
+  totalPost = 0;
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private postService: PostService) {
+  }
+
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -27,7 +38,7 @@ export class DashboardComponent implements OnInit {
             }
           });
         } else if(data.type === 'point') {
-              seq++;
+              seq ++;
               data.element.animate({
                 opacity: {
                   begin: seq * delays,
@@ -46,7 +57,7 @@ export class DashboardComponent implements OnInit {
       let seq2: any, delays2: any, durations2: any;
 
       seq2 = 0;
-      delays2 = 80;
+      delays2 = 30;
       durations2 = 500;
       chart.on('draw', function(data) {
         if(data.type === 'bar'){
@@ -65,86 +76,92 @@ export class DashboardComponent implements OnInit {
 
       seq2 = 0;
   }
-  ngOnInit() {
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
-      const dataDailySalesChart: any = {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+  private getUsersMonthlyFigure() {
+    let keys: string[] = [];
+    let values: number[] = [];
+    this.userService.getUsersMonthlyFigure().subscribe((response: IUserListData) => {
+        response.Data.forEach((element: IUserData) => {
+        keys.push(element.to);
+        values.push(element.amount);
+        this.totalUser += element.amount;});
+        this.drawUserChart(keys.reverse(), values.reverse());
+    });
+  }
+
+  private getPostsMonthlyFigure() {
+    let keys2: string[] = [];
+    let values2: number[] = [];
+    this.postService.getPostsMonthlyFigure().subscribe((response: IPostListData) => {
+        response.Data.forEach((element: IPostData) => {
+          keys2.push(element.to);
+          values2.push(element.amount);
+          this.totalPost += element.amount;
+        });
+        this.drawPostChart(keys2.reverse(), values2.reverse());
+    })
+  }
+
+  ngOnInit() {
+    this.getUsersMonthlyFigure();
+    this.getPostsMonthlyFigure();
+  }
+
+  private drawUserChart(keys: string[], values: number[]) {
+      const dataMonthlyUserRegister: any = {
+        // labels: trục x, series: giá trị theo cot y
+          labels: keys,
           series: [
-              [12, 17, 7, 17, 23, 18, 38]
+              values
           ]
       };
 
-      const optionsDailySalesChart: any = {
+      const optionsMonthlyUserRegister: any = {
           lineSmooth: Chartist.Interpolation.cardinal({
               tension: 0
           }),
           low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 8,
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
       };
 
-      const dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+      const monthlyUserRegsisterChart = new Chartist.Line('#dailySalesChart', dataMonthlyUserRegister, optionsMonthlyUserRegister);
 
-      this.startAnimationForLineChart(dailySalesChart);
+      this.startAnimationForLineChart(monthlyUserRegsisterChart);
+  }
 
+  private drawPostChart(keys: string[], values: number[]) {
+    const datawebsiteViewsChart = {
+      labels: keys,
+      series: [
+        values
+      ]
+    };
 
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+    const optionswebsiteViewsChart = {
+        axisX: {
+            showGrid: false
+        },
+        low: 0,
+        high: 16,
+        chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
+    };
 
-      const dataCompletedTasksChart: any = {
-          labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-          series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
-          ]
-      };
-
-     const optionsCompletedTasksChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-      };
-
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-      // start animation for the Completed Tasks Chart - Line Chart
-      this.startAnimationForLineChart(completedTasksChart);
-
-
-
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-
-      var datawebsiteViewsChart = {
-        labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-        series: [
-          [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
-        ]
-      };
-      var optionswebsiteViewsChart = {
-          axisX: {
-              showGrid: false
-          },
-          low: 0,
-          high: 1000,
-          chartPadding: { top: 0, right: 5, bottom: 0, left: 0}
-      };
-      var responsiveOptions: any[] = [
-        ['screen and (max-width: 640px)', {
-          seriesBarDistance: 5,
-          axisX: {
-            labelInterpolationFnc: function (value) {
-              return value[0];
-            }
+    const responsiveOptions: any[] = [
+      ['screen and (max-width: 640px)', {
+        seriesBarDistance: 5,
+        axisX: {
+          labelInterpolationFnc: function (value) {
+            return value[0];
           }
-        }]
-      ];
-      var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+        }
+      }]
+    ];
 
-      //start animation for the Emails Subscription Chart
-      this.startAnimationForBarChart(websiteViewsChart);
+    const websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+
+    //start animation for the Emails Subscription Chart
+    this.startAnimationForBarChart(websiteViewsChart);
   }
 
 }

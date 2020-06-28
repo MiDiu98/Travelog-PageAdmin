@@ -2,6 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services';
+import { User } from 'src/app/_models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,10 +17,16 @@ export class NavbarComponent implements OnInit {
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    currentUser: User;
+    currentUserSubscription: Subscription;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router, private authenticationService: AuthenticationService) {
       this.location = location;
       this.sidebarVisible = false;
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+      this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+            this.currentUser = user;
+      });
     }
 
     ngOnInit(){
@@ -32,6 +41,11 @@ export class NavbarComponent implements OnInit {
           this.mobile_menu_visible = 0;
         }
      });
+    }
+
+    logout() {
+      this.authenticationService.logout();
+      this.router.navigate(['/admin/login']);
     }
 
     sidebarOpen() {
