@@ -4,14 +4,11 @@ import { LoginComponent } from 'src/app/components/login';
 import { AuthGuard } from 'src/app/_helpers';
 import { DashboardComponent } from './components/dashboard';
 import { AdminLayoutComponent } from './components/layout-admin';
-import { AdminLayoutRoutes } from './components/layout-admin/admin-layout.routing';
 import { UserProfileComponent } from './components/user-profile';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 
 const routes: Routes = [
-   // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    // { path: 'layout', component: AdminLayoutComponent},
     { path: 'admin/login', component: LoginComponent },
     {
       path: '',
